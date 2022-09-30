@@ -1,7 +1,7 @@
 import { Container } from "react-bootstrap";
 import ItemDetail from "./ItemDetail";
 import { getProduct } from "./products";
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 const ItemDetailContainer = () => {
@@ -10,9 +10,14 @@ const ItemDetailContainer = () => {
 
     const [product, setProduct] = useState()
 
-    getProduct(id).then(res =>{
-        setProduct(res)
-    })
+
+    useEffect(() =>{
+        getProduct(id).then(res =>{
+            setProduct(res)
+        })
+    }, [id])
+
+    
     return (
         
         <Container>

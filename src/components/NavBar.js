@@ -2,17 +2,21 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import CartWidget from './CartWidget';
+import { Link } from "react-router-dom";
 
 const NavBar = () => {
     return ( <Navbar bg="dark" variant="dark">
     <Container>
-      <Navbar.Brand href="#home">VideogamesShop</Navbar.Brand>
+      <Navbar.Brand as={Link} to='/'>VideogamesShop</Navbar.Brand>
       <Nav className="me-auto">
-        <Nav.Link href="#home">Home</Nav.Link>
-        <Nav.Link href="#features">Consolas</Nav.Link>
-        <Nav.Link href="#pricing">Videojuegos</Nav.Link>
+        <Nav.Link as={Link} to='/'>Home</Nav.Link>
+        <Nav.Link as={Link} to='/Consolas'>Consolas</Nav.Link>
+        <Nav.Link as={Link} to='/Videojuegos'>Videojuegos</Nav.Link>
       </Nav>
-      <CartWidget/>
+      <Link to='/cart'>
+        <CartWidget/>
+      </Link>
+      
     </Container>
   </Navbar> 
 

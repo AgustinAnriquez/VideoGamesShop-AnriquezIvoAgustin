@@ -1,0 +1,8 @@
+.countContainer{
+    display: flex;
+    align-items: center;
+}
+.count{
+    margin:0 1rem;
+    font-size: 1.2em;
+}

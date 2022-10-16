@@ -1,13 +1,10 @@
-.countContainer{
+.itemDetail{
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
 }
-.count{
-    margin:0 1rem;
-    font-size: 1.2em;
-}
 
-.listCount{
+.goCartButton{
     margin:0.3rem
 }

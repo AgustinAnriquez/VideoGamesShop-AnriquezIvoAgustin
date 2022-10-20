@@ -6,9 +6,9 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import ItemDetailContainer from './components/ItemDetailContainer';
 import Cart from './components/Cart';
 import Checkout from './components/Checkout';
-import cartContext from './context/cartContext'
 import { useEffect } from 'react';
 import {collection, doc, getDoc, getDocs, getFirestore} from 'firebase/firestore'
+import { CartProvider } from './context/CartContext';
 
 
 function App() {
@@ -45,18 +45,17 @@ function App() {
   return (
     <>
     <BrowserRouter>
-      <NavBar/>
-      <Routes>
-        <Route path='/' element ={<ItemListContainer greeting={"Bienvenidos a VideogamesShop"}/>}/>
-        <Route path='/category/:categoryId' element={<ItemListContainer greeting={'Bienvenidos a VideogamesShop'} />} />
-        <Route path='/item/:id' element={<ItemDetailContainer />} />
-        <Route path='/cart' element={<Cart/>} />
-        <Route path='/checkout' element={<Checkout/>} />
-      </Routes>
-      
+      <CartProvider>
+        <NavBar/>
+        <Routes>
+          <Route path='/' element ={<ItemListContainer greeting={"Bienvenidos a VideogamesShop"}/>}/>
+          <Route path='/category/:categoryId' element={<ItemListContainer greeting={'Bienvenidos a VideogamesShop'} />} />
+          <Route path='/item/:id' element={<ItemDetailContainer />} />
+          <Route path='/cart' element={<Cart/>} />
+          <Route path='/checkout' element={<Checkout/>} />
+        </Routes>
+      </CartProvider>
     </BrowserRouter>
-    <cartContext.Provider value={[]}>
-    </cartContext.Provider> 
     </>
     
 

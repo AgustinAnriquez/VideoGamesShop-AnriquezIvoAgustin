@@ -15,6 +15,7 @@ const ItemCount = ({stock, onAdd}) =>{
     setCount(count - 1)
   }
 
+  const handleClick = () => onAdd(count);
 
   return (
     <div className='countContainer'>
@@ -24,7 +25,7 @@ const ItemCount = ({stock, onAdd}) =>{
             <Button variant="outline-primary" disabled={count >= stock} onClick={addCount}><PlusWidget/></Button>
         </div>
         <div className='listCount'>
-          <Button variant="primary" disabled={stock <= 0} onClick={onAdd}>Agregar al carrito</Button>
+          <Button variant="primary" disabled={stock <= 0} onClick={handleClick}>Agregar al carrito</Button>
         </div>
           
     </div>

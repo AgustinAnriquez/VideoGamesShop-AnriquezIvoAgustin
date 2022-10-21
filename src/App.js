@@ -6,42 +6,11 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import ItemDetailContainer from './components/ItemDetailContainer';
 import Cart from './components/Cart';
 import Checkout from './components/Checkout';
-import { useEffect } from 'react';
-import {collection, doc, getDoc, getDocs, getFirestore} from 'firebase/firestore'
 import { CartProvider } from './context/CartContext';
 
 
 function App() {
-  useEffect(()=>{
-    const db = getFirestore()
-
-    const itemReference = doc(db, 'items', 'WMmuSPimZ9DeTQaAnvSy')
-
-    getDoc(itemReference)
-      .then((snapshot) =>{
-        if(snapshot.exists()){
-          const item ={
-            id: snapshot.id,
-            ...snapshot.data()
-          };
-          console.log(item);
-        }
-      })
-      .catch(error => console.warn(error))
-
-  }, [])
-
-  useEffect(()=>{
-    const db = getFirestore();
-
-    const itemsCollection = collection(db, 'items');
-    getDocs(itemsCollection)
-      .then((snapshot) =>{
-        const list = snapshot.docs.map((doc)=>({id: doc.id, ...doc.data()}))
-        console.log(list)
-      })
-  })
-
+  
   return (
     <>
     <BrowserRouter>

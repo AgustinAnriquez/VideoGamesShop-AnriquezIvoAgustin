@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import CartContext from "../context/CartContext";
 import Table from 'react-bootstrap/Table';
 import { Container } from "react-bootstrap";
@@ -6,14 +6,45 @@ import { MdRemoveShoppingCart } from "react-icons/md";
 import './Cart.css'
 import Button from 'react-bootstrap/Button';
 import { Link } from "react-router-dom";
+import { createOrder } from "./orders";
+import OrderModal from "./OrderModal";
 
+const buyerMock ={
+  name: 'coderhouse',
+  phone: '1112223334',
+  email: 'coderhouse@mail.com'
+}
 
  const Cart = () => {
-   const {cart, total, removeItem} = useContext(CartContext)
+   const {cart, total, removeItem, clear} = useContext(CartContext)
+   const [user, setUser] = useState(buyerMock)
    console.log(cart, total);
-   const handleClick = (itemId) =>{
+   const[showModal, setShowModal] = useState(false)
+   const[orderId, setOrderId] = useState()
+   
+   const handleRemove = (itemId) =>{
     removeItem(itemId)
    }
+
+  const handleOpen = () =>{
+    setShowModal(true)
+   }
+
+  const handleClose = () =>{
+    setShowModal(false)
+  }
+
+  const handleBuy = async () =>{
+    const newOrder = {
+      buyer: buyerMock,
+      items: cart,
+      total
+    }
+    console.log(newOrder)
+    const newOrderId = await createOrder(newOrder)
+    setOrderId(newOrderId)
+    clear()
+  }
     return ( 
       <Container>
         {cart.length > 0 ? 
@@ -34,12 +65,13 @@ import { Link } from "react-router-dom";
                   <td>{item.title}</td>
                   <td>{item.price}</td>
                   <td>{item.quantity}</td>
-                  <td><MdRemoveShoppingCart onClick={() => handleClick(item.id)}/></td>
+                  <td><MdRemoveShoppingCart onClick={() => handleRemove(item.id)}/></td>
                  </tr>
               ))}
           </tbody>
         </Table>  
         <h3>Total: $ {total}</h3>
+        <Button variant="success" onClick={handleOpen}>Finalizar compra</Button>
           </> 
         ):
         (
@@ -49,7 +81,12 @@ import { Link } from "react-router-dom";
           </>
         )
         }
-        
+        {
+          showModal && 
+          (
+            <OrderModal showModal={showModal} onClose={handleClose} onBuy={handleBuy} orderId={orderId}/> 
+          )
+        }
         
       </Container>
     );

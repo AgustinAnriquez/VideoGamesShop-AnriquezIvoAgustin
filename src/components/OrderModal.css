@@ -1,0 +1,9 @@
+.modalContainer{
+    display: flex;
+}
+.checkoutContainer{
+    padding: 1rem;
+}
+.formContainer{
+    padding:0 1rem;
+}

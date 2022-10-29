@@ -6,14 +6,9 @@ Ecommerce creado con las siguientes tecnologias:
 -   BOOTSTRAP
 -   FIREBASE
 
-
-
-## Deployment
-
-
 ## Demo
 
-https://drive.google.com/file/d/1EqLS06v0avIRVp_ZnWTxb-TwRPIszkZr/view?usp=sharing
+https://drive.google.com/file/d/1EqLS06v0avIRVp_ZnWTxb-TwRPIszkZr/view?usp=share_link
 
 ## Estructura de directorios
 -   `/componentes`
